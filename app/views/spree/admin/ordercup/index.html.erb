@@ -1,0 +1,124 @@
+<%= csrf_meta_tags %>
+<% content_for :page_actions do %>
+  <li><%= button_link_to "Ordercup", admin_ordercup_index_path, :icon => 'icon-plus', :id => 'admin_ordercup_index' %></li>
+<% end %>
+<% content_for :page_title do %>
+   OrderCup - Powerful Web-Based Shipping
+<% end %>
+<div class="container">
+        <div class="row">
+          <div class="with-sidebar " id="content" data-hook="">
+	      	 <% if @store_connected > 0 %>
+		       <div class="twelve columns">
+			    	<div id="errorExplanation" class="errorExplanation" data-hook="">
+					    <h2>This Store is already Connected</h2> 
+					 </div>
+			   </div>
+		      <% else %>
+            <div class="twelve columns">
+	
+				<% unless @errors.blank? %>
+				<div id="errorExplanation" class="errorExplanation" data-hook="">
+				    <h2><%= @errors.length %> errors prohibited this record from being saved:</h2>
+				    <p>There were problems with the following fields:</p>
+				     <ul>
+					   <%  @errors.each do |err| %>
+				         <li><%= err %></li>
+				       <% end %>
+				     </ul>
+				  </div>
+				<% end %>	
+  <%= form_tag @ordercup_path, :id => 'spree_store_form' do -%>	
+  <div id="preferences" data-hook="">
+    <fieldset class="general no-border-top">
+	<div class="six columns" style="width:300px;">    
+	<div class="field">
+          <label for="store_business_name">Business Name <span style="color:#ff0000;">*</span></label>
+          <br>
+           
+          <%= text_field_tag 'store[business_name]', ((params[:store].present? && params[:store]['business_name'].present?) ? params[:store]['business_name'] : nil ), class: "fullwidth", title: "Enter Business Name" %>
+        </div>
+        <div class="field">
+          <label for="store_url">Store URL <span style="color:#ff0000;">*</span></label>
+          <br>
+          <%= text_field_tag 'store[url]', ((params[:store].present? && params[:store]['url'].present?) ? params[:store]['url'] : nil ), class: "fullwidth", title: "Enter Store URL" %> 
+        </div>
+        <div class="field">
+          <label for="store_api_key">API Access Key <span style="color:#ff0000;">*</span></label>
+          <br>
+          <%= text_field_tag 'store[api_key]', ((params[:store].present? && params[:store]['api_key'].present?) ? params[:store]['api_key'] : nil ), class: "fullwidth", title: "Paste API Access Key" %> 
+          
+        </div>
+        <div class="field">
+          <label for="store_store_ship_from_address_line1">Address1 <span style="color:#ff0000;">*</span></label>
+          <br>
+          <%= text_field_tag 'store[ship_from_address_line1]', ((params[:store].present? && params[:store]['ship_from_address_line1'].present?) ? params[:store]['ship_from_address_line1'] : nil ), class: "fullwidth", title: "Enter Ship From Address" %></div>
+     	<div class="field">
+          <label for="store_ship_from_city">City <span style="color:#ff0000;">*</span></label>
+          <br>
+           <%= text_field_tag 'store[ship_from_city]', ((params[:store].present? && params[:store]['ship_from_city'].present?) ? params[:store]['ship_from_city'] : nil ), class: "fullwidth", title: "Enter Ship From City" %>
+        </div>
+	    <div class="field">
+	       <label for="store_ship_from_zip">Postal Code <span style="color:#ff0000">*</span></label>
+		   <br>
+		   <%= text_field_tag 'store[ship_from_zip]', ((params[:store].present? && params[:store]['ship_from_zip'].present?) ? params[:store]['ship_from_zip'] : nil ), class: "fullwidth", title: "Enter Postal Code" %>
+	   </div>
+	   <div class="field">
+	     <label for="store_sender_name">Shipper Name <span style="color:#ff0000;">*</span></label>
+	     <br>
+	     <%= text_field_tag 'store[sender_name]', ((params[:store].present? && params[:store]['sender_name'].present?) ? params[:store]['sender_name'] : nil ), class: "fullwidth", title: "Enter Shipper name" %>
+	   </div>
+</div> <div class="six columns" style="width:300px;">
+       	<div class="field">
+          <label for="user_login">UserName <span style="color:#ff0000">*</span></label>
+          <br>
+           <%= text_field_tag 'user[login]', ((params[:user].present? && params[:user]['login'].present?) ? params[:user]['login'] : nil ), class: "fullwidth", title: "Enter Username/Login" %>
+        </div>
+       	<div class="field">
+	      <label for="user_password">Password <span style="color:#ff0000">*</span></label>
+	      <br>
+	      <%= password_field_tag 'user[password]', ((params[:user].present? && params[:user]['password'].present?) ? params[:user]['password'] : nil ), class: "fullwidth", title: "Enter Password" %>
+	    </div>
+	    <div class="field">
+	      <label for="user_password_confirmation">Password Confirmation <span style="color:#ff0000">*</span></label>
+	      <br>
+	      <%= password_field_tag 'user[password_confirmation]', ((params[:user].present? && params[:user]['password_confirmation'].present?) ? params[:user]['password_confirmation'] : nil ), class: "fullwidth", title: "Enter Confirm  Password" %>
+	    </div>
+        <div class="field">
+	      <label for="user_first_name">First Name <span style="color:#ff0000">*</span></label>
+	      <br>
+	       <%= text_field_tag 'user[first_name]', ((params[:user].present? && params[:user]['first_name'].present?) ? params[:user]['first_name'] : nil ), class: "fullwidth", title: "Enter First Name" %> 
+	    </div>
+	    <div class="field">
+	      <label for="user_last_name">Last Name <span style="color:#ff0000">*</span></label>
+	      <br>
+	      <%= text_field_tag 'user[last_name]', ((params[:user].present? && params[:user]['last_name'].present?) ? params[:user]['last_name'] : nil ), class: "fullwidth", title: "Enter Last Name" %> 
+	    </div>
+	    <div class="field">
+	      <label for="user_email">Email <span style="color:#ff0000">*</span></label>
+	      <br>
+	      <%= text_field_tag 'user[email]', ((params[:user].present? && params[:user]['email'].present?) ? params[:user]['email'] : nil ), class: "fullwidth", title: "Enter Email Address" %> 
+	    </div> 
+        <div class="field">
+	      <label for="store_ship_from_phone">Phone <span style="color:#ff0000">*</span></label>
+	      <br>
+	      <%= text_field_tag 'store[ship_from_phone]', ((params[:store].present? && params[:store]['ship_from_phone'].present?) ? params[:store]['ship_from_phone'] : nil ), class: "fullwidth", title: "Enter Ship From Phone Number" %> 
+	    </div>
+	</div>
+	<br/><br/><br/><br/>
+      <div class="form-buttons filter-actions actions" data-hook="buttons">
+	    <%= submit_tag('Connect',  title: 'Connect to Ordercup', class: "fa fa-refresh button", style: "margin-top:20px;" ) %>
+        <span class="or">or</span>
+        <a class="button fa fa-remove icon_link with-tip" href="/"><span class="text">Cancel</span></a>
+      </div>
+    </fieldset>
+  </div>
+<% end %>
+<%end%>	
+    </div>
+     		<%= render 'spree/admin/shared/configuration_menu' %>
+
+          </div>
+        </div>
+      </div>
+
