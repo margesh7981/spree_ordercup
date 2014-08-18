@@ -1,7 +1,7 @@
 SpreeOrdercup
 =============
 
-Introduction goes here.
+spree_ordercup allows spree store to connect to ordercup and allows streamline and automate order management, fulfillment and shipping for eCommerce, providing real-time, precise order status from the point of ordering to delivery. 
 
 Installation
 ------------
@@ -9,7 +9,7 @@ Installation
 Add spree_ordercup to your Gemfile:
 
 ```ruby
-gem 'spree_ordercup'
+gem 'spree_ordercup', :git => 'https://github.com/margesh7981/spree_ordercup.git'
 ```
 
 Bundle your dependencies and run the installation generator:
